@@ -1,9 +1,0 @@
-{
-  "databaseChangeLog": [
-    {
-      "include": {
-        "file": "db/changeset-1.json"
-      }
-    }
-  ]
-}
