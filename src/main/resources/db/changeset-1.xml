@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog>
+    <changeSet id="1" author="user">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="wallet"/>
+            </not>
+        </preConditions>
+        <changes>
+            <createTable tableName="wallet">
+                <column name="id" type="UUID">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="balance" type="DECIMAL(19,2)">
+                    <constraints defaultValueNumeric="0"/>
+                </column>
+                <column name="created_at" type="TIMESTAMP">
+                    <constraints defaultValueComputed="CURRENT_TIMESTAMP"/>
+                </column>
+            </createTable>
+        </changes>
+    </changeSet>
+</databaseChangeLog>
