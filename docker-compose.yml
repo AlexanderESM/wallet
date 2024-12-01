@@ -18,6 +18,8 @@ services:
     depends_on:
       - db
       - rabbitmq  # Убедитесь, что зависимые сервисы готовы перед запуском приложения
+    networks:
+      - wallet-network
 
   db:
     image: postgres:14
@@ -27,6 +29,8 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"  # Проброс порта базы данных на хост, если нужно
+    networks:
+      - wallet-network
 
   rabbitmq:
     image: rabbitmq:3-management  # Используется версия RabbitMQ с интерфейсом управления
@@ -37,3 +41,9 @@ services:
     ports:
       - "5672:5672"  # Проброс порта RabbitMQ для соединений приложения
       - "15672:15672" # Проброс порта для веб-интерфейса RabbitMQ
+    networks:
+      - wallet-network
+
+networks:
+  wallet-network:
+    driver: bridge
