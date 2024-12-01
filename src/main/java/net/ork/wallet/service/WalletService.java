@@ -12,7 +12,8 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.persistence.LockModeType; // Исправленный импорт
+
+import javax.persistence.LockModeType;
 import java.math.BigDecimal;
 import java.util.UUID;
 
