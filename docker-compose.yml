@@ -4,12 +4,12 @@ services:
   app:
     build: .
     ports:
-      - "8080:8080"
+      - "8081:8080"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/wallet
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
-      - RABBITMQ_HOST=rabbitmq  # Использование имени сервиса RabbitMQ
+      - RABBITMQ_HOST=rabbitmq  # Используется имя сервиса RabbitMQ как хостнейм
       - RABBITMQ_PORT=5672
       - RABBITMQ_USERNAME=guest
       - RABBITMQ_PASSWORD=guest
@@ -17,7 +17,7 @@ services:
       - WALLET_QUEUE_NAME=wallet_operations_queue
     depends_on:
       - db
-      - rabbitmq  # Зависимость от RabbitMQ
+      - rabbitmq  # Убедитесь, что зависимые сервисы готовы перед запуском приложения
 
   db:
     image: postgres:14
@@ -26,14 +26,14 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "5432:5432"  # Проброс порта базы данных на хост, если нужно
 
   rabbitmq:
-    image: rabbitmq:3-management  # Используется версия с интерфейсом управления
+    image: rabbitmq:3-management  # Используется версия RabbitMQ с интерфейсом управления
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
       RABBITMQ_DEFAULT_VHOST: /
     ports:
-      - "5672:5672"  # Для подключения из приложения
-      - "15672:15672" # Для веб-интерфейса управления RabbitMQ
+      - "5672:5672"  # Проброс порта RabbitMQ для соединений приложения
+      - "15672:15672" # Проброс порта для веб-интерфейса RabbitMQ
