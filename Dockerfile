@@ -1,3 +1,3 @@
 FROM openjdk:17-jdk-slim
-COPY target/wallet-app.jar wallet-app.jar
+COPY out/artifacts/wallet_jar/wallet.jar wallet-app.jar
 ENTRYPOINT ["java", "-jar", "/wallet-app.jar"]
